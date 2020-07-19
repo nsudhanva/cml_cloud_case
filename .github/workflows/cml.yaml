@@ -44,7 +44,7 @@ jobs:
           eval "$(docker-machine env --shell sh $MACHINE)" && \
           docker run --name runner --gpus all -d \
             -v /docker_machine/gce-credentials.json:/gce-credentials.json \
-            -e GOOGLE_APPLICATION_CREDENTIALS='/gce-credentials.json' \
+            -e GOOGLE_APPLICATION_CREDENTIALS="/gce-credentials.json" \
             -v /docker_machine/machine:/root/.docker/machine \
             -e DOCKER_MACHINE=$MACHINE \
             -e repo_token=$repo_token \
