@@ -1,4 +1,10 @@
-deploy-gce-gpu:
+ 
+name: style-transfer
+
+on: [push]
+
+jobs:
+  deploy-gce-gpu:
     runs-on: [ubuntu-latest]
     container: docker://dvcorg/cml-cloud-runner
 
