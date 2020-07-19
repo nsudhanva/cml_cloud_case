@@ -11,7 +11,7 @@ jobs:
       - name: deploy
         shell: bash
         env:
-          repo_token: ${{ secrets.REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_DATA }}
         run: |
           echo "Deploying..."
@@ -45,7 +45,7 @@ jobs:
             -e GOOGLE_APPLICATION_CREDENTIALS="/gce-credentials.json" \
             -v /docker_machine/machine:/root/.docker/machine \
             -e DOCKER_MACHINE=$MACHINE \
-            -e repo_token=$repo_token \
+            -e GITHUB_TOKEN=$GITHUB_TOKEN \
             -e RUNNER_LABELS=$RUNNER_LABELS \
             -e RUNNER_REPO=$RUNNER_REPO \
             -e RUNNER_IDLE_TIMEOUT=120 \
