@@ -1,4 +1,3 @@
- 
 name: style-transfer
 
 on: [push]
@@ -12,7 +11,7 @@ jobs:
       - name: deploy
         shell: bash
         env:
-          repo_token: ${{ secrets.REPO_TOKEN }} 
+          repo_token: ${{ secrets.REPO_TOKEN }}
           GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_DATA }}
         run: |
           echo "Deploying..."
@@ -34,8 +33,7 @@ jobs:
 
           eval "$(docker-machine env --shell sh $MACHINE)"
 
-          (
-          docker-machine ssh $MACHINE "sudo mkdir -p /docker_machine && sudo chmod 777 /docker_machine" && \
+          (docker-machine ssh $MACHINE "sudo mkdir -p /docker_machine && sudo chmod 777 /docker_machine" && \
           docker-machine scp -r -q ~/.docker/machine/ $MACHINE:/docker_machine && \
           docker-machine scp -q gce-credentials.json $MACHINE:/docker_machine/gce-credentials.json && \
           docker-machine ssh $MACHINE "sudo apt update && sudo apt install -y ubuntu-drivers-common && sudo ubuntu-drivers autoinstall" && \
@@ -52,5 +50,4 @@ jobs:
             -e RUNNER_REPO=$RUNNER_REPO \
             -e RUNNER_IDLE_TIMEOUT=120 \
             docker://dvcorg/cml-gpu-py3-cloud-runner && \
-          sleep 20 && echo "Deployed $MACHINE"
-          ) || (docker-machine rm -f $MACHINE && exit 1)
+          sleep 20 && echo "Deployed $MACHINE") || (docker-machine rm -f $MACHINE && exit 1)
